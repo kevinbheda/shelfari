@@ -1,3 +1,4 @@
+var app =app||{};
 var BookItem = Backbone.Model.extend({
 	urlRoot:'/shelfari/codeigniter/index.php/bookapp/',
 	getbookurl:function(){
@@ -15,7 +16,7 @@ var BookItem = Backbone.Model.extend({
 var BookItemCollection =Backbone.Collection.extend({
 
 		model:BookItem,
-		url:"codeigniter/index.php/bookapp/search"
+		url:"/shelfari/codeigniter/index.php/bookapp/search"
 
 });
 

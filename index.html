@@ -23,6 +23,7 @@
 	<script type"text/javascript" src="js/models/bookitem.js"></script>
 	<script type="text/javascript" src="js/views/bookitemform.js"></script>
 	<script type="text/javascript" src="js/views/searchbookview.js"></script>
+	<script type="text/javascript" src="js/views/bookitemview.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	
 
@@ -98,9 +99,9 @@
 
 	 <!-- end of search book template -->
 <script type="text/template" id="bookitem_template">
-	<p><% book_name %><p>
-	<a href="edit/<%= id %>" class="btn">Edit</a>
-	<a href="delete/<%= id %>" class="btn">Delete</a>
+	<p><%= book_name %><p>
+	<a href="#edit/<%= id %>" class="btn">Edit</a>
+	<a href="#delete/<%= id %>" class="btn">Delete</a>
 	<p style="display:none"><% id %></p>
 </script>
 
@@ -126,7 +127,9 @@
 
 	<div class="container bs-docs-example" id="app">
 
+
 	</div>
+
 
 
 

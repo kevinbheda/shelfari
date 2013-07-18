@@ -86,14 +86,3 @@ var BookItemForm=Backbone.View.extend({
 });
 
 
-var BookItemView=Backbone.View.extend({
-	tagName:"li",
-	initialize: function(){
-		this.render(); },
-
-		render :function(){
-
-			var template=_.template($("bookitem_template"),this.model.toJSON());
-
-		}
-	});
