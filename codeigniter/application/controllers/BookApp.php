@@ -2,20 +2,39 @@
 
 class BookApp extends CI_Controller{
 	
-	 function  __construct(){
+	function  __construct(){
 		parent::__construct();
 		$this->load->model('book_model');
 		 //$this->load->helper('form');
-        
+
         //helper for redirecting url
-        $this->load->helper('url');
+		$this->load->helper('url');
 	}
 
 
 	//default index page
 	public function index()
 	{	
-		if($_SERVER['REQUEST_METHOD'] == 'POST')
+
+		switch ($_SERVER['REQUEST_METHOD']) {
+			case 'POST':
+			$this->add();
+			break;
+			
+			case  'PUT':
+			$this->edit(func_get_arg(0));
+			break;
+
+			case 'DELETE':
+			$this->delete(func_get_arg(0));
+			break;		
+
+			default:
+				# code...
+			break;
+		}
+		
+		/*if($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			
 			$this->add();
@@ -26,8 +45,9 @@ class BookApp extends CI_Controller{
 		}
 		else if($_SERVER['REQUEST_METHOD'] == 'DELETE')
 		{
-			$this->delete();
-		}
+			
+			$this->delete($parameter);
+		}*/
 		/*else if($_SERVER['REQUEST_METHOD'] == 'GET')
 		{
 			$this->search();
@@ -52,7 +72,7 @@ class BookApp extends CI_Controller{
 	public function search()
 	{	
 		//$this->input->post('some_data');
-		  $bookName= $this->input->post('book_name');
+		$bookName= $this->input->post('book_name');
 		/*$payload=file_get_contents("php://input");
 		$bookName=json_decode($payload,true);
 
@@ -66,19 +86,22 @@ class BookApp extends CI_Controller{
 
 
 	//book edit controller
-	public function edit()
+	public function edit($id)
 	{    
 		//mostly post variables
 		//$this->input->post('some_data');
-		$id=2;
-		$book =array(
-                "book_name"=>"Let us C plus plus",
-				"status"=>"Yes");
+		//$id=func_get_arg(0);
+		/*$book =array(
+			"book_name"=>"Let us C plus plus",
+			"status"=>"Yes");*/
+
+		$payload=file_get_contents("php://input");
+		$book=json_decode($payload,true);
 
 		$data['result']=$this->book_model->updateBook($id,$book);
 		$this->load->view('pages/edit',$data);
 
-	
+
 
 	}
 
@@ -92,7 +115,7 @@ class BookApp extends CI_Controller{
 		
 
 		$this->load->view('/pages/delete',$data);
-	
+
 
 	}
 

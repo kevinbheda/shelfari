@@ -10,7 +10,7 @@ var BookItemForm=Backbone.View.extend({
 	},
 
 	render :function(){
-		var template = _.template( $("#addbook_template").html(), {} );
+		var template = _.template( $("#addbook_template").html(), {model:{}} );
 	   // Load the compiled HTML into the Backbone "el"
 	   
 	   this.$el.html( template ); 

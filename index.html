@@ -44,7 +44,7 @@
 	<label class="control-label" for="addbokinputBookName"><b>Book Name</b></label>
 	<div class="controls">
 
-	<input type="text" class="input-medium" id="addbook_book_name" placeholder="Book Name">
+	<input type="text" class="input-medium" value="<%= model.book_name%>" id="addbook_book_name" placeholder="Book Name">
 
 	</div>
 
@@ -54,7 +54,7 @@
 	<label class="control-label" for="inputAuthorName"><b>Author Name</b></label>
 	<div class="controls">
 
-	<input type="text" class="input-medium" id="addbook_author_name" placeholder="Author">
+	<input type="text" class="input-medium" value="<%=model.author %>" id="addbook_author_name" placeholder="Author">
 
 	</div>
 
@@ -86,6 +86,7 @@
 
 	</div>
 	 <input type="reset" id="addbook_reset" style="display:none">
+	 <input type="hidden" id="addbook_id" value="<%=model.id %>">
 	</form>
 	</script>
 	<script type="text/template" id="searchbook_template">
@@ -100,8 +101,8 @@
 	 <!-- end of search book template -->
 <script type="text/template" id="bookitem_template">
 	<p><%= book_name %><p>
-	<a href="#edit/<%= id %>" class="btn">Edit</a>
-	<a href="#delete/<%= id %>" class="btn">Delete</a>
+	<a href="#edit/<%= id %>" class="btn edit">Edit</a>
+	<a href="#delete/<%= id %>" class="btn delete">Delete</a>
 	<p style="display:none"><% id %></p>
 </script>
 

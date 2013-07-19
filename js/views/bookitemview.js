@@ -7,12 +7,28 @@ var BookListItemView=Backbone.View.extend({
 
 	render :function(){
 
-		var template=_.template($("#bookitem_template").html(),this.model.toJSON());
+		var template=_.template($("#bookitem_template").html(),this.model.attributes);
 		this.$el.html( template ); 
 
 		//	document.append(this.el.html());
 		return this;
+	},
+
+	events: {
+		"click .delete": "deleteBook",
+		"click  .edit" :  "editBook"
+	},
+
+	deleteBook:function(){
+		this.model.destroy({ wait:true,
+			success:function(model,response,options){
+				console.log("response="+JSON.stringify(response));
+				console.log("options="+JSON.stringify(options));
+			}
+		});
+		this.remove();
 	}
+
 });
 
 var BookListView =Backbone.View.extend({
