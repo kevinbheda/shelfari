@@ -1,64 +1,71 @@
 var app=app || {}
 var SearchBookView = Backbone.View.extend({
 
-	
-
-	events : {
-		"click  #booksearch_submit"	 : "searchBook"
-
-	},
-
 	initialize: function(){ 
-		this.searchBookResults=new BookItemCollection();
-		this.searchBookResultsView=new BookListView({model:this.searchBookResults});
+		app.collections.searchBookResults=new BookItemCollection();
+		app.views.searchBookResultsView=new BookListView({model:app.collections.searchBookResults});
 	},
 
 	render: function(){
-	  // Compile the template using underscore 
-	  var template = _.template( $("#searchbook_template").html(), {} );
-	   // Load the compiled HTML into the Backbone "el"
-	   this.$el.html( template ); 
-	   this.$el.append(this.searchBookResultsView.render().el);
-	   return this;
-	} ,
+
+		var template = _.template( $("#searchbook_template").html());
+
+		this.$el.html( template ); 
+		app.collections.searchBookResults.reset();
+		this.$el.append(app.views.searchBookResultsView.render().el);
+		this.delegateEvents({
+			"click  #booksearch_submit"	 : "searchBook",
+			"keypress #searchBook_book_name" : "onkeypress"	
+		});
+		return this;
+	},
 
 	searchBook : function(){
 		
 		var bookname=this.$("#searchBook_book_name").val();
+		app.collections.searchBookResults.reset();	
 		
-		var  xp=this.searchBookResults.reset();
-		var that=this;
-
-		console.log(this.searchBookResults);
-		console.log()
-		$.ajax({
-			url:"codeigniter/index.php/bookapp/search/",
-			type :'POST',
-
-
-			dataType:"json",
-			data :{book_name:this.$("#searchBook_book_name").val()}})
-		.done(
-			function(data)
-			{console.log("hello world"+data);
-
-			xp.add(data);	
-		});
-
-
-		if(xp.length !=0)
+		var bookname=this.$("#searchBook_book_name").val();
+		if(!bookname)
 		{
-			//this.displaybooks(xp);
+			alert("please enter the book name");
 		}
+		else{
+			$.ajax({
+				url:"codeigniter/index.php/bookapp/search/",
+				type :'POST',
+
+
+				dataType:"json",
+				data :
+				{
+					book_name:bookname
+				}
+			}
+			)
+			.done(
+				function(data)
+				{
+
+					app.collections.searchBookResults.add(data);	
+				})
+			.fail(
+				function(data){
+					alert("error");
+				}
+				);
+
+		}	
+
 
 		
 
 	},
-
-	displaybooks:function(books){
-		
-
-	}
+	onkeypress: function (event) {
+        if (event.keyCode === 13) { // enter key pressed
+        	event.preventDefault();
+        }
+    }
 
 
 

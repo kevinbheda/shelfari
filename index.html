@@ -22,6 +22,7 @@
 	<script type="text/javascript"  src="js/lib/bootstrap.min.js"></script>
 	<script type"text/javascript" src="js/models/bookitem.js"></script>
 	<script type="text/javascript" src="js/views/bookitemform.js"></script>
+	<script type="text/javascript" src="js/views/editbookview.js"></script>
 	<script type="text/javascript" src="js/views/searchbookview.js"></script>
 	<script type="text/javascript" src="js/views/bookitemview.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
@@ -38,13 +39,13 @@
 
 	<script type="text/template" id="addbook_template">
 	<form class="form-horizontal"  id="add_book" method="post" action="#">
-	<legend>Add Book</legend>
+	<legend class="heading"></legend>
 	<!-- book name-->
 	<div class="control-group">
 	<label class="control-label" for="addbokinputBookName"><b>Book Name</b></label>
 	<div class="controls">
 
-	<input type="text" class="input-medium" value="<%= model.book_name%>" id="addbook_book_name" placeholder="Book Name">
+	<input type="text" class="input-medium" value="<%= book_name%>" id="addbook_book_name" placeholder="Book Name">
 
 	</div>
 
@@ -54,7 +55,7 @@
 	<label class="control-label" for="inputAuthorName"><b>Author Name</b></label>
 	<div class="controls">
 
-	<input type="text" class="input-medium" value="<%=model.author %>" id="addbook_author_name" placeholder="Author">
+	<input type="text" class="input-medium" value="<%=author %>" id="addbook_author_name" placeholder="Author">
 
 	</div>
 
@@ -85,8 +86,7 @@
 	</div>
 
 	</div>
-	 <input type="reset" id="addbook_reset" style="display:none">
-	 <input type="hidden" id="addbook_id" value="<%=model.id %>">
+	
 	</form>
 	</script>
 	<script type="text/template" id="searchbook_template">
@@ -102,7 +102,7 @@
 <script type="text/template" id="bookitem_template">
 	<p><%= book_name %><p>
 	<a href="#edit/<%= id %>" class="btn edit">Edit</a>
-	<a href="#delete/<%= id %>" class="btn delete">Delete</a>
+	<a href="#menu-item/searchbook" class="btn delete">Delete</a>
 	<p style="display:none"><% id %></p>
 </script>
 

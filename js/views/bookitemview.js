@@ -1,3 +1,4 @@
+var app=app || {};
 var BookListItemView=Backbone.View.extend({
 	tagName:"li",
 	initialize: function(){
@@ -7,8 +8,10 @@ var BookListItemView=Backbone.View.extend({
 
 	render :function(){
 
+		
 		var template=_.template($("#bookitem_template").html(),this.model.attributes);
 		this.$el.html( template ); 
+
 
 		//	document.append(this.el.html());
 		return this;
@@ -20,13 +23,33 @@ var BookListItemView=Backbone.View.extend({
 	},
 
 	deleteBook:function(){
+		var that=this;
 		this.model.destroy({ wait:true,
 			success:function(model,response,options){
+
 				console.log("response="+JSON.stringify(response));
 				console.log("options="+JSON.stringify(options));
+				that.remove();
+			}, 
+			error:function(model,response,options)
+			{
+				alert("failed to save");
 			}
 		});
-		this.remove();
+		
+	},
+	editBook:function(){
+		var that=this;
+		app.navigate("#editbook/"+that.get("id"),{trigger: true, replace: true});
+		app.views.editbookview=new EditBookView({model:that.model});
+		console.log("from edit book item"+that.model.get("id"));
+		var myview=app.views.editbookview.render().el;
+		//console.log(myview);
+		
+		$('#app').html(myview);
+		
+
+
 	}
 
 });
@@ -43,6 +66,7 @@ var BookListView =Backbone.View.extend({
 		});
 	},
 	render:function () {
+		console.log("BookListView render called");
 		this.$el.empty();
 		_.each(this.model.models, function (bookitem) {
 			this.$el.append(new BookListItemView({model:bookitem}).render().el);

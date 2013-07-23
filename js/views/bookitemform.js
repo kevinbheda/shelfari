@@ -5,21 +5,21 @@ var BookItemForm=Backbone.View.extend({
 
 	
 	initialize: function  () {
-		
+
 		console.log("new BookItemForm initialized");
 	},
 
 	render :function(){
-		var template = _.template( $("#addbook_template").html(), {model:{}} );
-	   // Load the compiled HTML into the Backbone "el"
-	   
-	   this.$el.html( template ); 
+		
+		var template = _.template( $("#addbook_template").html(),this.model.attributes );
 
-	   console.log("from render");
-	   this.delegateEvents({
-	   	'click .btn' :'save'
-	   });
-	   return this;
+		this.$el.html( template ); 
+		this.$(".heading").html("Add Book");
+
+		this.delegateEvents({
+			'click .btn' :'save'
+		});
+		return this;
 	},
 
 
@@ -27,57 +27,75 @@ var BookItemForm=Backbone.View.extend({
 	save:function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		//alert("from book save");
+		
 		var book ={
-			'bookname': this.$("#addbook_book_name").val(),
+			'book_name': this.$("#addbook_book_name").val(),
 			'author':this.$("#addbook_author_name").val(),
 			'status': this.$(".addbook_status").val()
 		}
-		console.log(book);
-		if((!book.bookname) || (!book.author) || book.status=='Choose Read status'){
+		
+		if((!book.book_name) || (!book.author) || book.status=='Choose Read status'){
 			alert("Please fill in the details");
 		}
 		else{
 
 
+
+			if(this.model.id=="")
+				this.model.set({id:null});
 			this.setModelData();
-			console.log(this.model.getbookurl());
-			console.log(this.model.get('book_name'));
+			console.log("before model save method!!!!!!");
 
 			this.model.save(this.model.attributes,
 			{
-				success:function(result)
-				{
-					if(result.id !='0')
+				success:function(model,response)
+				{	
+					var result=response;
+
+					console.log(result.toString());
+					console.log("model paramters"+ model);
+					if(!isNaN(response.id))     // if id exists
 					{
-						alert("Book updated successfully!!");
+						if(result.id!='0')
+						{
+							alert("Book updated with id"+result.id );
+						}
+						else {
+							alert("Book already exists");
+						}
 					}
-					else {
-						alert("Book already exists");
+					else{
+						alert("Failed to save");
+						app.navigate();
 					}
 
 				},
 				error :function()
 				{
-					alert("failed to save");
+					alert("Failed to save");
+
 				}
 			}
 			);
-		}// end of else
-		//this.$("#addbook_reset").trigger('click');
-		document.getElementById("add_book").reset();
+		}
+		
+
+		
+		
+
 	},
 	//end of save function
 
 
 
 	setModelData :function(){
+
 		
 		this.model.set({
 			book_name: this.$("#addbook_book_name").val(),
 			author:this.$("#addbook_author_name").val(),
 			status:this.$(".addbook_status").val(),
-			id : null
+			id:null
 			//url:"shelfari/codeigniter/index.php/bookapp/add/"
 		});
 	},

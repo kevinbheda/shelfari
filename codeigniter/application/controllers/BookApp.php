@@ -8,7 +8,7 @@ class BookApp extends CI_Controller{
 		 //$this->load->helper('form');
 
         //helper for redirecting url
-		$this->load->helper('url');
+		
 	}
 
 
@@ -77,7 +77,11 @@ class BookApp extends CI_Controller{
 		$bookName=json_decode($payload,true);
 
 		print_r($bookName);
+
 */
+		if(!$bookName)
+			echo "";
+		return ;
 		$data['books']=$this->book_model->get_by_name($bookName);
 		$this->load->view('pages/search', $data);
 
