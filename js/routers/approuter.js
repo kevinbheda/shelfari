@@ -8,7 +8,7 @@ var AppRouter = Backbone.Router.extend({
 
 	
 	welcome:function(){
-		$('#app').html("<p>Navigate to Add book tab to add a new book</p><br><p>And</p><br><p> Search tab to search for a book by name and update or delete the book info</p>");
+		$('#app').html("<p>Navigate to Add book tab to add a new book</p><br><p>And Search tab to search for a book by name and update or delete the book info</p>");
 	},
 	searchbook: function () {
 		if(!app.views.searchView)

@@ -1,6 +1,6 @@
 <?php
 
-class BookApp extends CI_Controller{
+class bookapp extends CI_Controller{
 	
 	function  __construct(){
 		parent::__construct();
