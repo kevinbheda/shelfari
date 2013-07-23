@@ -15,14 +15,13 @@ var AppRouter = Backbone.Router.extend({
 		app.views.searchView= new SearchBookView();
 		
 		var myview=app.views.searchView.render().el;
-		//console.log(myview);
+		
 		$('#app').html(myview);
 		
 	},
 
 	addbook: function () {
-		console.log("addbook called");
-		
+			
 		  if(!app.views.addbook)
 			app.views.addbook=new BookItemForm({model:new BookItem()});
 		
@@ -39,9 +38,9 @@ var AppRouter = Backbone.Router.extend({
 		app.views.editbookview=new EditBookView({
 			model:app.collections.searchBookResults.get(id)
 		});
-		//console.log("from edit book item"+that.model.get("id"));
+		
 		var myview=app.views.editbookview.render().el;
-		//console.log(myview);
+
 		
 		$('#app').html(myview);
 		}

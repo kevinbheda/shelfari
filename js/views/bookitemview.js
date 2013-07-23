@@ -2,34 +2,31 @@ var app=app || {};
 var BookListItemView=Backbone.View.extend({
 	tagName:"li",
 	initialize: function(){
-		//this.model=new BookItem({id:'3',book_name:"hello wassup"});
-		//this.render();
+
 	},
 
 	render :function(){
 
-		
 		var template=_.template($("#bookitem_template").html(),this.model.attributes);
 		this.$el.html( template ); 
-
-
-		//	document.append(this.el.html());
+		this.delegateEvents({
+			"click .delete": "deleteBook",
+			"click  .edit" :  "editBook"
+		});
 		return this;
 	},
 
-	events: {
-		"click .delete": "deleteBook",
-		"click  .edit" :  "editBook"
-	},
 
 	deleteBook:function(){
-		var that=this;
+		var that=this;                             
+		                                         //wait: true wait for server response
 		this.model.destroy({ wait:true,
 			success:function(model,response,options){
-
-				console.log("response="+JSON.stringify(response));
-				console.log("options="+JSON.stringify(options));
-				that.remove();
+			
+				if(response.result)
+					that.remove();
+				else 
+					alert("Failed to delete");
 			}, 
 			error:function(model,response,options)
 			{
@@ -41,15 +38,6 @@ var BookListItemView=Backbone.View.extend({
 	editBook:function(){
 		var that=this;
 		app.routers.AppRouter.navigate("#edit/"+that.model.get("id"),{trigger: true, replace: true});
-		/*app.views.editbookview=new EditBookView({model:that.model});
-		console.log("from edit book item"+that.model.get("id"));
-		var myview=app.views.editbookview.render().el;
-		//console.log(myview);
-		
-		$('#app').html(myview);
-		
-*/
-
 	}
 
 });

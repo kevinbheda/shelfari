@@ -2,8 +2,6 @@ var app=app || {};
 
 var BookItemForm=Backbone.View.extend({
 
-
-	
 	initialize: function  () {
 
 		console.log("new BookItemForm initialized");
@@ -38,13 +36,9 @@ var BookItemForm=Backbone.View.extend({
 			alert("Please fill in the details");
 		}
 		else{
-
-
-
-			if(this.model.id=="")
-				this.model.set({id:null});
+			
 			this.setModelData();
-			console.log("before model save method!!!!!!");
+
 
 			this.model.save(this.model.attributes,
 			{
@@ -52,8 +46,6 @@ var BookItemForm=Backbone.View.extend({
 				{	
 					var result=response;
 
-					console.log(result.toString());
-					console.log("model paramters"+ model);
 					if(!isNaN(response.id))     // if id exists
 					{
 						if(result.id!='0')
@@ -87,8 +79,6 @@ var BookItemForm=Backbone.View.extend({
 	},
 	//end of save function
 
-
-
 	setModelData :function(){
 
 		
@@ -97,7 +87,7 @@ var BookItemForm=Backbone.View.extend({
 			author:this.$("#addbook_author_name").val(),
 			status:this.$(".addbook_status").val(),
 			id:null
-			//url:"shelfari/codeigniter/index.php/bookapp/add/"
+			
 		});
 	},
 	

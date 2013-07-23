@@ -7,7 +7,7 @@ var EditBookView=Backbone.View.extend({
 	},
 	
 	render :function  () {
-		// body...
+		
 		var template = _.template( $("#addbook_template").html(),this.model.attributes );
 		this.$el.html(template);
 		this.$(".heading").html("Edit Book");
@@ -19,7 +19,7 @@ var EditBookView=Backbone.View.extend({
 	},
 	save:function(e){
 		e.preventDefault();
-		//e.stopPropogation();
+		
 		var book ={
 			'bookname': this.$("#addbook_book_name").val(),
 			'author':this.$("#addbook_author_name").val(),
@@ -32,7 +32,7 @@ var EditBookView=Backbone.View.extend({
 		else {
 
 			this.model.set(book);
-			console.log(this.model.changedAttributes(book));
+		
 			this.model.save(this.model.attributes,{
 				success:function(model,response)
 				{

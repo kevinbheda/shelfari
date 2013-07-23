@@ -20,21 +20,7 @@ var BookItem = Backbone.Model.extend({
 		};
 		}
 
-	/*sync:function(method,model,options){
-		switch(method)
-		{
-			case "read":
-			$.ajax({
-				method :"DELETE",
-				url:this.urlRoot,
-				data: "{id:'"+this.get(id)+"'}",
-
-
-			});
-			break;
-		}
-
-	}*/
+	
 });
 
 
