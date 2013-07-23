@@ -5,9 +5,7 @@ class BookApp extends CI_Controller{
 	function  __construct(){
 		parent::__construct();
 		$this->load->model('book_model');
-		 //$this->load->helper('form');
-
-        //helper for redirecting url
+	
 		
 	}
 
@@ -34,24 +32,7 @@ class BookApp extends CI_Controller{
 			break;
 		}
 		
-		/*if($_SERVER['REQUEST_METHOD'] == 'POST')
-		{
-			
-			$this->add();
-		}
-		else if($_SERVER['REQUEST_METHOD'] == 'PUT')
-		{
-			$this->edit();
-		}
-		else if($_SERVER['REQUEST_METHOD'] == 'DELETE')
-		{
-			
-			$this->delete($parameter);
-		}*/
-		/*else if($_SERVER['REQUEST_METHOD'] == 'GET')
-		{
-			$this->search();
-		}*/
+		
 		
 
 	}
@@ -71,17 +52,14 @@ class BookApp extends CI_Controller{
 	//book search controller
 	public function search()
 	{	
-		//$this->input->post('some_data');
+		
 		$bookName= $this->input->post('book_name');
-		/*$payload=file_get_contents("php://input");
-		$bookName=json_decode($payload,true);
 
-		print_r($bookName);
-
-*/
 		if(!$bookName)
-			echo "";
+		{	
+		echo "";
 		return ;
+		}
 		$data['books']=$this->book_model->get_by_name($bookName);
 		$this->load->view('pages/search', $data);
 
@@ -92,12 +70,7 @@ class BookApp extends CI_Controller{
 	//book edit controller
 	public function edit($id)
 	{    
-		//mostly post variables
-		//$this->input->post('some_data');
-		//$id=func_get_arg(0);
-		/*$book =array(
-			"book_name"=>"Let us C plus plus",
-			"status"=>"Yes");*/
+	
 
 		$payload=file_get_contents("php://input");
 		$book=json_decode($payload,true);

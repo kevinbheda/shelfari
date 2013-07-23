@@ -63,10 +63,11 @@ var BookItemForm=Backbone.View.extend({
 						else {
 							alert("Book already exists");
 						}
+						app.routers.AppRouter.navigate("#",{trigger: true, replace: true});
 					}
 					else{
 						alert("Failed to save");
-						app.navigate();
+						app.routers.AppRouter.navigate("#",{trigger: true, replace: true});
 					}
 
 				},

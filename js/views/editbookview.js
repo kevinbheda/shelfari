@@ -44,6 +44,7 @@ var EditBookView=Backbone.View.extend({
 				error:function(model,response)
 				{
 					alert("failed to save");
+					app.routers.AppRouter.navigate("#",{trigger: true, replace: true});
 				}
 
 				});

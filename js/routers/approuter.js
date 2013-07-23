@@ -32,7 +32,21 @@ var AppRouter = Backbone.Router.extend({
 	
 	},
 	editbook:function(id)
-	{
+	{	
 
+		if (id  && app.collections.searchBookResults.get(id))
+		{
+		app.views.editbookview=new EditBookView({
+			model:app.collections.searchBookResults.get(id)
+		});
+		//console.log("from edit book item"+that.model.get("id"));
+		var myview=app.views.editbookview.render().el;
+		//console.log(myview);
+		
+		$('#app').html(myview);
+		}
+		else{
+
+		}
 	}
 });

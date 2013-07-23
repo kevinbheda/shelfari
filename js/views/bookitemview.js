@@ -40,15 +40,15 @@ var BookListItemView=Backbone.View.extend({
 	},
 	editBook:function(){
 		var that=this;
-		app.navigate("#editbook/"+that.get("id"),{trigger: true, replace: true});
-		app.views.editbookview=new EditBookView({model:that.model});
+		app.routers.AppRouter.navigate("#edit/"+that.model.get("id"),{trigger: true, replace: true});
+		/*app.views.editbookview=new EditBookView({model:that.model});
 		console.log("from edit book item"+that.model.get("id"));
 		var myview=app.views.editbookview.render().el;
 		//console.log(myview);
 		
 		$('#app').html(myview);
 		
-
+*/
 
 	}
 

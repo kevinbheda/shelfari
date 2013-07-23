@@ -47,7 +47,9 @@ var SearchBookView = Backbone.View.extend({
 				function(data)
 				{
 
-					app.collections.searchBookResults.add(data);	
+					var result=app.collections.searchBookResults.add(data);	
+					if(!result.length)
+						alert("No books found");
 				})
 			.fail(
 				function(data){

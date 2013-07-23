@@ -7,25 +7,14 @@ class Book_model extends CI_Model {
 	{
 		$this->load->database();
 	}
-	public function getBooks()
-	{
-		
-		$query=$this->db->get('book');
-
-		return $query->result();
-		
-		
-
-	}
-
 	//add a new book
 	public function saveBook($book)
 	{
 
-		$query=$this->db->query('SELECT * FROM book WHERE book_name = '.$this->db->escape($book['book_name']));
+
 		$insertQuery=$this->db->insert('book',$book);
 		return $this->db->insert_id();
-		}
+	}
 	//search for books
 	public function get_by_name($bookName)
 	{	
@@ -43,6 +32,7 @@ class Book_model extends CI_Model {
 		return $query;
 
 	}
+	//deletebook
 	public function delete($id)
 	{
 		$this->db->where('id', $id);
