@@ -9,7 +9,7 @@ var BookItemForm=Backbone.View.extend({
 
 	render :function(){
 		
-		var template = _.template( $("#addbook_template").html(),this.model.attributes );
+		var template = _.template( $("#addbook_template").html() );
 
 		this.$el.html( template ); 
 		this.$(".heading").html("Add Book");

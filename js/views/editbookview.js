@@ -11,6 +11,7 @@ var EditBookView=Backbone.View.extend({
 		var template = _.template( $("#addbook_template").html(),this.model.attributes );
 		this.$el.html(template);
 		this.$(".heading").html("Edit Book");
+		this.$(".addbook_status").val(this.model.get("status"));
 		this.delegateEvents({
 			'click .btn':'save'
 		});
