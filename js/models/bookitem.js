@@ -9,7 +9,7 @@ var BookItem = Backbone.Model.extend({
 		id:"",
 		author: "",
 		status:"",
-		book_name: ''
+		book_name: ""
 	},
 	toJSON:function()
 	{
@@ -25,7 +25,6 @@ var BookItem = Backbone.Model.extend({
 
 
 var BookItemCollection =Backbone.Collection.extend({
-
 	model:BookItem,
 	url:"/shelfari/codeigniter/index.php/bookapp/search"
 
