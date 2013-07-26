@@ -4,96 +4,75 @@
 	<script type="text/javascript" src="js/lib/jquery-min.js"></script>
 	<script type="text/javascript" src="js/lib/underscore-min.js"></script>
 	<script type="text/javascript" src="js/lib/backbone.js"></script>
-	<script type="text/javascript" src="js/routers/approuter.js"></script>
 	<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>	
 	<script type="text/javascript" src="js/models/bookitem.js"></script>
 	<script type="text/javascript" src="js/views/bookitemform.js"></script>
 	<script type="text/javascript" src="js/views/editbookview.js"></script>
-	<script type="text/javascript" src="js/views/searchbookview.js"></script>
 	<script type="text/javascript" src="js/views/bookitemview.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/views/searchbookview.js"></script>
+	<script type="text/javascript" src="js/routers/approuter.js"></script>
 	
-
 	<link href="css/bootstrap.css" rel="stylesheet">
-
-	
-	
 </head>
+
 <body>
 
 	<script type="text/template" id="addbook_template">
 	<form class="form-horizontal"  id="add_book" method="post" action="#">
-	<legend class="heading"></legend>
-	<!-- book name-->
-	<div class="control-group">
-	<label class="control-label" for="addbokinputBookName"><b>Book Name</b></label>
-	<div class="controls">
+		<legend class="heading"></legend>
+		<!-- book name-->
+		<div class="control-group">
+			<label class="control-label" for="addbokinputBookName"><b>Book Name</b></label>
+			<div class="controls">
+				<input type="text" class="input-medium" value="<%= book_name%>" id="addbook_book_name" placeholder="Book Name">
+			</div>
+		</div>
 
-	<input type="text" class="input-medium" value="<%= book_name%>" id="addbook_book_name" placeholder="Book Name">
+		<div class="control-group">
+			<label class="control-label" for="inputAuthorName"><b>Author Name</b></label>
+			<div class="controls">
+				<input type="text" class="input-medium" value="<%=author %>" id="addbook_author_name" placeholder="Author">
+			</div>
+		</div>
 
-	</div>
-
-	</div>
-
-	<div class="control-group">
-	<label class="control-label" for="inputAuthorName"><b>Author Name</b></label>
-	<div class="controls">
-
-	<input type="text" class="input-medium" value="<%=author %>" id="addbook_author_name" placeholder="Author">
-
-	</div>
-
-	</div>
-
-	<div class="control-group">
-	<label class="control-label" for="inputStatus"><b>Read Status</b></label>
-	<div class="controls">
-
-	<select class="addbook_status" >
-	<option selected="selected" value="4">Choose Read status</option>
-	<option value="0">YES</option>
-	<option value="1">No</option>
-	<option value="2">Reading</option>
-	</select>
-
-	</div>
-
-	</div>
-
-	
-
-	<div class="control-group">
-
-	<div class="controls">
-	<button type="submit" id="addbook_button" class="btn">Save</button>
-
-	</div>
-
-	</div>
-	
+		<div class="control-group">
+			<label class="control-label" for="inputStatus"><b>Read Status</b></label>
+			<div class="controls">
+				<select class="addbook_status" >
+					<option selected="selected" value="4">Choose Read status</option>
+					<option value="0">YES</option>
+					<option value="1">No</option>
+					<option value="2">Reading</option>
+			</select>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" id="addbook_button" class="btn">Save</button>
+			</div>
+		</div>
 	</form>
 	</script>
+
 	<script type="text/template" id="searchbook_template">
-
-	<form class="form-search" id="searchbook">
-	<input type="text" class="input-medium search-query" id="searchBook_book_name">
-
-	<button type="button"  id="booksearch_submit" class="btn">Search</button>
-	</form>
+		<form class="form-search" id="searchbook">
+			<input type="text" class="input-medium search-query" id="searchBook_book_name">
+			<button type="button"  id="booksearch_submit" class="btn">Search</button>
+		</form>
 	</script> 
 
 	 <!-- end of search book template -->
-<script type="text/template" id="bookitem_template">
-	<p><%= book_name %><p>
-	<a href="#edit/<%= id %>" class="btn edit">Edit</a>
-	<a href="#menu-item/searchbook" class="btn delete">Delete</a>
-	<p style="display:none"><% id %></p>
-</script>
+	<script type="text/template" id="bookitem_template">
+		<p><%= book_name %><p>
+		<a href="#edit/<%= id %>" class="btn edit">Edit</a>
+		<a href="#menu-item/searchbook" class="btn delete">Delete</a>
+		<p style="display:none"><% id %></p>
+	</script>
 
 	<h1>Welcome to Shelfari 1.0 </h1>
 	<div class="container">
-		
-
 		<ul class="nav nav-pills">
 			<li><a href="#">Home</a></li>
 			<li><a href="#menu-item/addbook">Add Book</a></li>
@@ -102,12 +81,7 @@
 	</div>
 
 	<div class="container bs-docs-example" id="app">
-
-
 	</div>
-
-
-
-
 </body>
+
 </html>

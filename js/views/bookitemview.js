@@ -1,12 +1,9 @@
-var app=app || {};
-var BookListItemView=Backbone.View.extend({
+var app=app || {}; 
+app.views.BookListItemView=Backbone.View.extend({
+	
 	tagName:"li",
-	initialize: function(){
-
-	},
-
-	render :function(){
-
+	
+	render: function(){
 		var template=_.template($("#bookitem_template").html(),this.model.attributes);
 		this.$el.html( template ); 
 		this.delegateEvents({
@@ -16,10 +13,8 @@ var BookListItemView=Backbone.View.extend({
 		return this;
 	},
 
-
-	deleteBook:function(){
+	deleteBook: function(){
 		var that=this;                             
-		                                         //wait: true wait for server response
 		this.model.destroy({ wait:true,
 			success:function(model,response,options){
 			
@@ -28,38 +23,41 @@ var BookListItemView=Backbone.View.extend({
 				else 
 					alert("Failed to delete");
 			}, 
-			error:function(model,response,options)
-			{
+
+			error:function(model,response,options){
 				alert("failed to save");
 			}
 		});
 		
 	},
+	
 	editBook:function(){
 		var that=this;
-		app.routers.AppRouter.navigate("#edit/"+that.model.get("id"),{trigger: true, replace: true});
+		app.appRouter.navigate("#edit/"+that.model.get("id"),{trigger: true, replace: true});
 	}
 
 });
 
-var BookListView =Backbone.View.extend({
+app.views.BookListView =Backbone.View.extend({
+	
 	tagName:"ul",
+	
 	className:"booklist",
 
-	initialize:function(){
-		var self = this;
+	initialize: function(){
+		var that=this;
 		this.model.on("reset", this.render, this);
 		this.model.on("add", function (bookitem) {
-			self.$el.append(new BookListItemView({model:bookitem}).render().el);
+			that.$el.append(new app.views.BookListItemView({model:bookitem}).render().el);
 		});
 	},
-	render:function () {
+
+	render: function (){
 		console.log("BookListView render called");
-		this.$el.empty();
-		_.each(this.model.models, function (bookitem) {
+		this.$el.empty();   // empty previous results view
+		_.each(this.model.models, function (bookitem){
 			this.$el.append(new BookListItemView({model:bookitem}).render().el);
 		}, this);
 		return this;
 	}
-
 });

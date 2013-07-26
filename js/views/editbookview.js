@@ -1,29 +1,26 @@
-var app =app || {};
-var EditBookView=Backbone.View.extend({
+var app=app || {};
+app.views.EditBookView=Backbone.View.extend({
 
-	initialize:function(){
-
-		
+	initialize: function(){
+		console.log("EditBookView initialized");
 	},
 	
-	render :function  () {
-		
+	render: function(){
 		var template = _.template( $("#addbook_template").html(),this.model.attributes );
 		this.$el.html(template);
 		this.$(".heading").html("Edit Book");
 		this.$(".addbook_status").val(this.model.get("status"));
 		this.delegateEvents({
-			'click .btn':'save'
+			'click .btn': 'save'
 		});
-
 		return this;
 	},
-	save:function(e){
+
+	save: function(e){
 		e.preventDefault();
-		
 		var book ={
 			'bookname': this.$("#addbook_book_name").val(),
-			'author':this.$("#addbook_author_name").val(),
+			'author': this.$("#addbook_author_name").val(),
 			'status': this.$(".addbook_status").val()
 		}
 
@@ -31,25 +28,23 @@ var EditBookView=Backbone.View.extend({
 			alert("Please fill in the details");
 		}
 		else {
-
 			this.model.set(book);
-		
 			this.model.save(this.model.attributes,{
-				success:function(model,response)
-				{
+
+				success: function(model,response){
 					console.log(response);
+
 					if(response.result)
 					alert("Book updated successfully");
-					app.routers.AppRouter.navigate("#",{trigger: true, replace: true});
-				},
-				error:function(model,response)
-				{
-					alert("failed to save");
-					app.routers.AppRouter.navigate("#",{trigger: true, replace: true});
-				}
 
-				});
+					app.appRouter.navigate("#",{trigger: true, replace: true});
+				},
+				
+				error: function(model,response){
+					alert("failed to save");
+					app.appRouter.navigate("#",{trigger: true, replace: true});
+				}
+			});
 		}
 	}
-
 });

@@ -1,17 +1,13 @@
-var app=app || {};
+var app=app|| {};
 app.views= {};
 app.routers={};
-app.modeles={};
+app.models={};
 app.collections={};
-
-
-
-
+					
 $(document).on("ready", function () {
-	app.routers.AppRouter = new AppRouter();
-
+	app.appRouter = new app.routers.AppRouter();
 	$(function() {
-		Backbone.history.start({});
+		Backbone.history.start({});   
 	});
 });
 

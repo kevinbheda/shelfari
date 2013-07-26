@@ -1,32 +1,28 @@
-var app =app||{};
-var BookItem = Backbone.Model.extend({
-	urlRoot:'/shelfari/codeigniter/index.php/bookapp/index',
-	getbookurl:function(){
-		return status;
-	},
+var app=app || {};
+app.models.BookItem = Backbone.Model.extend({
 
-	defaults: {
+	urlRoot:'/shelfari/codeigniter/index.php/bookapp/index',
+	
+	defaults:{
 		id:"",
 		author: "",
 		status:"",
 		book_name: ""
 	},
-	toJSON:function()
-	{
-		return 	{
+
+	toJSON:function(){
+		return{
 			"book_name":this.get('book_name'),
 			"author":this.get('author'),
 			"status":this.get('status')
-		};
-		}
-
-	
+		};   
+	}
 });
 
+app.collections.BookItemCollection =Backbone.Collection.extend({
 
-var BookItemCollection =Backbone.Collection.extend({
-	model:BookItem,
+	model:app.models.BookItem,
+
 	url:"/shelfari/codeigniter/index.php/bookapp/search"
-
 });
 
