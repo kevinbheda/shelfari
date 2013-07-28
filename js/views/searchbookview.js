@@ -34,7 +34,7 @@ app.views.SearchBookView = Backbone.View.extend({
 				data: {
 					book_name:bookname
 				}
-			})
+			})    
 			.done(function(data){
 					var result=app.searchBookResults.add(data);	
 					if(!result.length)
@@ -47,8 +47,8 @@ app.views.SearchBookView = Backbone.View.extend({
 	},
 
 	onkeypress: function(event){
-        if(event.keyCode === 13) { // enter key pressed
-        	event.preventDefault();
+        if(event.keyCode === 13) {     
+        	event.preventDefault(); // to prevent default submission action when enter key is pressed
         }
     }
 });
