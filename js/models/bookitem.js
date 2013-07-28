@@ -4,10 +4,14 @@ app.models.BookItem = Backbone.Model.extend({
 	urlRoot:'/shelfari/codeigniter/index.php/bookapp/index',
 	
 	defaults:{
-		id:"",
+		id: null,
 		author: "",
 		status:"",
 		book_name: ""
+	},
+
+	url: function(){
+		return '/shelfari/codeigniter/index.php/bookapp/index/';
 	},
 
 	toJSON:function(){
@@ -23,6 +27,5 @@ app.collections.BookItemCollection =Backbone.Collection.extend({
 
 	model:app.models.BookItem,
 
-	url:"/shelfari/codeigniter/index.php/bookapp/search"
+	url:"/shelfari/codeigniter/index.php/bookapp/index"
 });
-
