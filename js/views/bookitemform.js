@@ -6,63 +6,53 @@ app.views.BookItemForm=Backbone.View.extend({
 	},
 
 	render: function(){
-		var template = _.template( $("#addbook_template").html(),this.model.attributes );
+		var template = _.template( $("#addbook_template").html(),this.model.attributes);
 		this.$el.html( template ); 
 		this.$(".heading").html("Add Book");
+		this.$("#deletebook_button").remove();
 		this.delegateEvents({
-			'click .btn' :'save'
+			'click #addbook_button': 'save'
 		});
 		return this;
 	},
 
 	save: function(e){
 		e.preventDefault();
-		e.stopPropagation();
-		var book ={
-			'book_name': this.$("#addbook_book_name").val(),
-			'author':this.$("#addbook_author_name").val(),
-			'status': this.$(".addbook_status").val()
-		}
+		e.stopPropagation(); // to prevent default form submission action
+		var book=validateForm(); 
 		
-		if((!book.book_name) || (!book.author) || book.status==4){
-			alert("Please fill in the details");
-		}
+		if(!book)
+			alert("Please fill in the details"); //form validation code
 		else{
-			this.setModelData();
-			this.model.save(this.model.attributes,{
-				success: function(model,response){	
-					var result=response;
+			this.addbook(book);
+		}
+	},
 
-					if(!isNaN(response.id)){
-						if(result.id!='0'){
-							alert("Book updated with id"+result.id );
-						}
-						else{
-							alert("Book already exists");
-						} 
-						app.appRouter.navigate("#",{trigger: true, replace: true});
-					}
-					else{
-						alert("Failed to save");
-						app.appRouter.navigate("#",{trigger: true, replace: true});
-					}
-				},
-				
-				error: function(){
+	//non-event func
+	addbook: function(book){
+		this.model.set(book);
+		this.model.set({id:null}); //for post request
+		this.model.save(this.model.attributes,{  
+			success: function(model,response){	
+	
+				if(!isNaN(response.id)){
+					if(response.id!='0')
+						alert("Book updated with id"+response.id );
+					else
+						alert("Book already exists");
+
+					clearFormFields();
+				}
+				else{
 					alert("Failed to save");
 				}
-			});
-		}
-	},
+			},
 
-	setModelData: function(){
-		this.model.set({
-			book_name: this.$("#addbook_book_name").val(),
-			author:this.$("#addbook_author_name").val(),
-			status:this.$(".addbook_status").val(),
-			id:null
+			error: function(){
+				alert("Failed to save");
+			}
 		});
-	},
+	}
 });
 
 
