@@ -17,11 +17,11 @@ app.views.BookListView =Backbone.View.extend({
 	className:"booklist",
 
 	initialize: function(){
-		var that=this;
+		var _this=this; //view refrence
 		console.log("book BookListView initialize");
 		this.model.on("reset", this.render, this);
 		this.model.on("add", function (bookitem) {
-			that.$el.append(new app.views.BookListItemView({model:bookitem}).render().el);
+			_this.$el.append(new app.views.BookListItemView({model:bookitem}).render().el);
 		});
 	},
 
@@ -30,7 +30,6 @@ app.views.BookListView =Backbone.View.extend({
 		this.$el.empty();   // empty previous results view
 		_.each(this.model.models, function (bookitem){
 			this.$el.append(new BookListItemView({model:bookitem}).render().el);
-Uncaught ReferenceError: BookListItemView is not defined
 		}, this);
 		return this;
 	}
