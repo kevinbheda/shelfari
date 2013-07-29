@@ -1,5 +1,4 @@
 <?php
-
 class bookapp extends CI_Controller {
 	
 function  __construct(){
@@ -74,6 +73,6 @@ public function delete($id)
 	$data=array("result"=>$result);	
 	$this->load->view('/pages/delete',$data);
 }
-
->
+}
+?>
 

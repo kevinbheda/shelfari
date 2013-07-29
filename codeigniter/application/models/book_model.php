@@ -31,8 +31,8 @@ public function getRandomBooks()
 	//add a new book
 public function saveBook($book)
 {	
-	var status=$book["status"];
-	if(!(is_numeric(status) && status>=0 && status <=2))
+	$status=$book["status"];
+	if(!(is_numeric($status) && $status>=0 && $status <=2))
 		return 0;
 	else{
 		$this->db->where("book_name",$book["book_name"]);
