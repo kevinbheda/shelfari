@@ -8,6 +8,22 @@ class Book_model extends CI_Model {
 		$this->load->database();
 	}
 	
+	public function  getBookById($id)
+	{
+		$this->db->where('id', $id);
+		$query=$this->db->get($this->table_book);
+		return $query->row(0);
+	}
+	// return random books for home view
+	public function getRandomBooks()
+	{
+		$this->db->select("book_name,id");
+		$this->db->order_by("rand()");
+		$this->db->limit(10);
+		$query=$this->db->get($this->table_book);
+		return $query->result();
+	}
+
 	//add a new book
 	public function saveBook($book)
 	{	
@@ -23,7 +39,7 @@ class Book_model extends CI_Model {
 	
 	//search for books
 	public function getByName($bookName)
-	{	
+	{	$this->db->select("book_name,id");
 		$this->db->like('book_name', $bookName,'after');
 		$query=$this->db->get($this->table_book); 
 		return $query->result();
