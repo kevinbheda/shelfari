@@ -9,7 +9,11 @@ app.routers.AppRouter = Backbone.Router.extend({
 	},
 	
 	welcome: function(){
-		$('#app').html("<p>Navigate to Add book tab to add a new book</p><br><p>And Search tab to search for a book by name and update or delete the book info</p>");
+		if(!app.randomBooksView)
+			app.randomBooksView=new app.views.BookListView({model: new app.collections.BookItemCollection()});
+		app.randomBooksView.model.reset();
+		app.randomBooksView.model.fetch();
+		$('#app').html(app.randomBooksView.render().el);
 	},
 	
 	searchbook: function (){
@@ -27,12 +31,18 @@ app.routers.AppRouter = Backbone.Router.extend({
 	},
 	
 	editbook: function(id){	
-		if (id  && app.searchBookResults.get(id)){
-			app.editBookView=new app.views.EditBookView({
-				model:app.searchBookResults.get(id)
+		if (id){
+			var book=new app.models.BookItem({"id":id});
+			var url=book.url()+book.get("id");
+			if(!app.editBookView)
+				app.editBookView=new app.views.EditBookView({model:book});
+			book.fetch({"url": url,
+				success: function(model,response){
+					var myview=app.editBookView.render().el;
+					$('#app').html(myview);
+					}
 			});
-			var myview=app.editBookView.render().el;
-			$('#app').html(myview);
+			
 		}
 		else{
 			
