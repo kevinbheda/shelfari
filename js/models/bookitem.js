@@ -23,7 +23,6 @@ app.models.BookItem = Backbone.Model.extend({
 });
 
 app.collections.BookItemCollection =Backbone.Collection.extend({
-
 	model:app.models.BookItem,
 	url:"/shelfari/codeigniter/index.php/bookapp/index/"
 });
