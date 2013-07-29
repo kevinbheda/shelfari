@@ -1,4 +1,3 @@
-
 ##Shelfari ##
 
 Shelfari is sample book record app built with backbone.js + Codeigniter PHP.
@@ -24,7 +23,8 @@ Import  book.sql to your mysql server and then configure
       url:'shelfari/codeigniter/index.php/bookapp/search'
 
     
-    
+For CodeIgniter environment is set to Development with errors enabled but html,php code is commented out
+in /codeigniter/error/*.php files ,toggle comment for debugging
 
 
 
