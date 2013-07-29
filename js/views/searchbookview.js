@@ -23,16 +23,15 @@ app.views.SearchBookView = Backbone.View.extend({
 		var bookname=this.$("#searchBook_book_name").val();
 		app.searchBookResults.reset();	
 		var bookname=this.$("#searchBook_book_name").val();
-		if(!bookname){
+		if(!bookname)
 			alert("please enter the book name");
-		}
 		else{
 			$.ajax({
 				url: "codeigniter/index.php/bookapp/search/",
 				type: "POST",
 				dataType: "json",
 				data: {
-					book_name:bookname
+				      	book_name:bookname
 				}
 			})    
 			.done(function(data){
@@ -41,7 +40,7 @@ app.views.SearchBookView = Backbone.View.extend({
 						alert("No books found");
 				})
 			.fail(function(data){
-					alert("error");
+				alert("error");
 			});
 		}	
 	},
