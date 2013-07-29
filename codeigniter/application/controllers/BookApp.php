@@ -11,11 +11,18 @@ class bookapp extends CI_Controller {
 	public function index()     
 	{	
 		switch ($_SERVER['REQUEST_METHOD']){
+			case 'GET':
+			if(func_num_args())
+				$this->getBookById(func_get_arg(0));
+			else 
+				$this->getRandomBooks();
+			break;
+
 			case 'POST':
 			$this->add();
 			break;
 
-			case  'PUT':
+			case  'PATCH':
 			$this->edit(func_get_arg(0));
 			break;
 
@@ -29,6 +36,16 @@ class bookapp extends CI_Controller {
 		}
 	}
 
+	public function getBookByid($id)
+	{
+		$data['books']=$this->book_model->getBookById($id);
+		$this->load->view('pages/books', $data);
+	}	
+	public function getRandomBooks()
+	{
+		$data['books']=$this->book_model->getRandomBooks();
+		$this->load->view('pages/books', $data);
+	}
 	//book add controlller func
 	public function add()
 	{		
@@ -48,7 +65,7 @@ class bookapp extends CI_Controller {
 			return ;
 		}
 		$data['books']=$this->book_model->getByName($bookName);
-		$this->load->view('pages/search', $data);
+		$this->load->view('pages/books', $data);
 	}
 
 	//book edit controller func
