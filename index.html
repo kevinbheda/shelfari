@@ -20,55 +20,53 @@
 	<!-- templates -->
 	<script type="text/template" id="addbook_template">
 	<form class="form-horizontal"  id="add_book" method="post" action="#">
-		<legend class="heading"></legend>
-		<!-- book name-->
-		<div class="control-group">
-			<label class="control-label" for="addbokinputBookName"><b>Book Name</b></label>
-			<div class="controls">
-				<input type="text" class="input-medium" value="<%= book_name%>" id="addbook_book_name" placeholder="Book Name">
-			</div>
-		</div>
+	<legend class="heading"></legend>
+	<!-- book name-->
+	<div class="control-group">
+	<label class="control-label" for="addbokinputBookName"><b>Book Name</b></label>
+	<div class="controls">
+	<input type="text" class="input-medium" value="<%= book_name%>" id="addbook_book_name" placeholder="Book Name">
+	</div>
+	</div>
 
-		<div class="control-group">
-			<label class="control-label" for="inputAuthorName"><b>Author Name</b></label>
-			<div class="controls">
-				<input type="text" class="input-medium" value="<%=author %>" id="addbook_author_name" placeholder="Author">
-			</div>
-		</div>
+	<div class="control-group">
+	<label class="control-label" for="inputAuthorName"><b>Author Name</b></label>
+	<div class="controls">
+	<input type="text" class="input-medium" value="<%=author %>" id="addbook_author_name" placeholder="Author">
+	</div>
+	</div>
 
-		<div class="control-group">
-			<label class="control-label" for="inputStatus"><b>Read Status</b></label>
-			<div class="controls">
-				<select class="addbook_status" >
-					<option selected="selected" value="4">Choose Read status</option>
-					<option value="0">YES</option>
-					<option value="1">No</option>
-					<option value="2">Reading</option>
-			</select>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<div class="controls">
-				<button type="submit" id="addbook_button" class="btn">Save</button>
-			</div>
-		</div>
+	<div class="control-group">
+	<label class="control-label" for="inputStatus"><b>Read Status</b></label>
+	<div class="controls">
+	<select class="addbook_status" >
+	<option selected="selected" value="4">Choose Read status</option>
+	<option value="0">YES</option>
+	<option value="1">No</option>
+	<option value="2">Reading</option>
+	</select>
+	</div>
+	</div>
+	
+	<div class="control-group" id="">
+	<div class="controls" id="saveDeleteControls">
+	<button type="submit" id="addbook_button" class="btn">Save</button>
+	<button type="button" id="deletebook_button" class="btn">Delete</button>
+	</div>
+	</div>
 	</form>
 	</script>
 
 	<script type="text/template" id="searchbook_template">
-		<form class="form-search" id="searchbook">
-			<input type="text" class="input-medium search-query" id="searchBook_book_name">
-			<button type="button"  id="booksearch_submit" class="btn">Search</button>
-		</form>
+	<form class="form-search" id="searchbook">
+	<input type="text" class="input-medium search-query" id="searchBook_book_name" placeholder="Book name">
+	<button type="button"  id="booksearch_submit" class="btn">Search</button>
+	</form>
 	</script> 
 
-	 <!-- end of search book template -->
+	<!-- end of search book template -->
 	<script type="text/template" id="bookitem_template">
-		<p><%= book_name %><p>
-		<a href="#edit/<%= id %>" class="btn edit">Edit</a>
-		<a href="#menu-item/searchbook" class="btn delete">Delete</a>
-		<p style="display:none"><% id %></p>
+	<a href="#edit/<%= id %>" class="btn btn-link"><%= book_name %></a>
 	</script>
 
 	<!--end of templates -->
@@ -76,14 +74,15 @@
 	<h1>Welcome to Shelfari 1.0 </h1>
 	<div class="container">
 		<ul class="nav nav-pills">
-			<li><a href="#">Home</a></li>
+			<li><a href="#">Books</a></li>
 			<li><a href="#menu-item/addbook">Add Book</a></li>
 			<li><a href="#menu-item/searchbook">Search Book</a></li>
 		</ul>
+		<div class="container bs-docs-example" id="app">
+		</div>
+
 	</div>
 
-	<div class="container bs-docs-example" id="app">
-	</div>
 </body>
 
 </html>
