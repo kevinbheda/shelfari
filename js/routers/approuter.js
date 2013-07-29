@@ -31,7 +31,7 @@ app.routers.AppRouter = Backbone.Router.extend({
 	},
 	
 	editbook: function(id){	
-		if (id){
+		if (!isNaN(id)){
 			var book=new app.models.BookItem({"id":id});
 			var url=book.url()+book.get("id");
 			app.editBookView=new app.views.EditBookView({model:book});
