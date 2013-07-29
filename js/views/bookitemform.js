@@ -43,11 +43,11 @@ app.views.BookItemForm=Backbone.View.extend({
 					clearFormFields();
 				}
 				else
-					alert("Failed to save");
+				    alert("Failed to save");
 			},
 
 			error: function(){
-				alert("Failed to save");
+			    alert("Failed to save");
 			}
 		});
 	}
