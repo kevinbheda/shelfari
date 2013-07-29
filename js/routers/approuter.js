@@ -34,18 +34,14 @@ app.routers.AppRouter = Backbone.Router.extend({
 		if (id){
 			var book=new app.models.BookItem({"id":id});
 			var url=book.url()+book.get("id");
-			if(!app.editBookView)
-				app.editBookView=new app.views.EditBookView({model:book});
-			book.fetch({"url": url,
+			app.editBookView=new app.views.EditBookView({model:book});
+				book.fetch({"url": url,
 				success: function(model,response){
 					var myview=app.editBookView.render().el;
 					$('#app').html(myview);
-					}
+				}
 			});
-			
-		}
-		else{
-			
 		}
 	}
-});
+}
+);
