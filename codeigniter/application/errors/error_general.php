@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- comment out html and php code for debugging -->
 <!-- <html lang="en">
 <head>
 <title>Error</title>
