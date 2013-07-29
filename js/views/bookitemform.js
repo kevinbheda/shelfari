@@ -23,9 +23,8 @@ app.views.BookItemForm=Backbone.View.extend({
 		
 		if(!book)
 			alert("Please fill in the details"); //form validation code
-		else{
+		else
 			this.addbook(book);
-		}
 	},
 
 	//non-event func
@@ -43,9 +42,8 @@ app.views.BookItemForm=Backbone.View.extend({
 
 					clearFormFields();
 				}
-				else{
+				else
 					alert("Failed to save");
-				}
 			},
 
 			error: function(){
