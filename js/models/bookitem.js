@@ -1,7 +1,7 @@
 var app=app || {};
 app.models.BookItem = Backbone.Model.extend({
 
-	urlRoot:'/shelfari/codeigniter/index.php/bookapp/index',
+	urlRoot:'/shelfari/codeigniter/index.php/bookapp/index/',
 	
 	defaults:{
 		id: null,
@@ -27,5 +27,5 @@ app.collections.BookItemCollection =Backbone.Collection.extend({
 
 	model:app.models.BookItem,
 
-	url:"/shelfari/codeigniter/index.php/bookapp/index"
+	url:"/shelfari/codeigniter/index.php/bookapp/index/"
 });
