@@ -13,9 +13,11 @@ app.routers.AppRouter = Backbone.Router.extend({
         if (!app.randomBooksView) {
             app.randomBooksView = new app.views.BookListView({ model: new app.collections.BookItemCollection() });
         }
-        app.randomBooksView.model.reset();
-        app.randomBooksView.model.fetch();
-        $('#app').html(app.randomBooksView.render().el);
+        $('#app').html("loading...");
+        var onResponse = app.randomBooksView.model.fetch({reset: true});
+        $.when(onResponse).then(function () {
+            $('#app').html(app.randomBooksView.render().el);
+        });
     },
 
     searchbook: function () {
