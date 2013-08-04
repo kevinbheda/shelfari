@@ -6,11 +6,13 @@
 var app = app || {};
 
 app.views.SearchBookView = Backbone.View.extend({
+
     initialize: function () {
         app.searchBookResults = new app.collections.BookItemCollection();
         app.searchBookResultsView = new app.views.BookListView({model: app.searchBookResults});
         console.log("SearchBookView initialized");
     },
+
     render: function () {
         var template = _.template($("#searchbook_template").html());
         this.$el.html(template);
@@ -22,6 +24,7 @@ app.views.SearchBookView = Backbone.View.extend({
         });
         return this;
     },
+
     searchBook : function () {
         var bookname = this.$("#searchBook_book_name").val();
         app.searchBookResults.reset();
@@ -47,6 +50,7 @@ app.views.SearchBookView = Backbone.View.extend({
                 });
         }
     },
+
     onkeypress: function (event) {
         if (event.keyCode === 13) {
             event.preventDefault(); // to prevent default submission action when enter key is pressed
