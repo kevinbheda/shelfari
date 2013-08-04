@@ -2,7 +2,9 @@
 //$(function () {
 var app = app || {};
 app.views.BookListItemView = Backbone.View.extend({
+
     tagName: "li",
+
     render: function () {
         var template = _.template($("#bookitem_template").html(), this.model.attributes);
         this.$el.html(template);
@@ -10,8 +12,11 @@ app.views.BookListItemView = Backbone.View.extend({
     }
 });
 app.views.BookListView = Backbone.View.extend({
+
     tagName: "ul",
+
     className: "booklist",
+
     initialize: function () {
         var _this = this; //view refrence
         console.log("book BookListView initialize");
@@ -20,11 +25,11 @@ app.views.BookListView = Backbone.View.extend({
             _this.$el.append(new app.views.BookListItemView({model: bookitem}).render().el);
         });
     },
+
     render: function () {
-        console.log("BookListView render called");
         this.$el.empty();   // empty previous results view
         _.each(this.model.models, function (bookitem) {
-            this.$el.append(new BookListItemView({model: bookitem}).render().el);
+            this.$el.append(new app.views.BookListItemView({model: bookitem}).render().el);
         }, this);
         return this;
     }
