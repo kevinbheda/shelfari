@@ -9,7 +9,7 @@ app.views.SearchBookView = Backbone.View.extend({
 
     initialize: function () {
         app.searchBookResults = new app.collections.BookItemCollection();
-        app.searchBookResultsView = new app.views.BookListView({model: app.searchBookResults});
+        app.searchBookResultsView = new app.views.BookListView({model: app.searchBookResults}); //model in place collection
         console.log("SearchBookView initialized");
     },
 

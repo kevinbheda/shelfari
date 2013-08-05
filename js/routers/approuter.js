@@ -14,10 +14,12 @@ app.routers.AppRouter = Backbone.Router.extend({
             app.randomBooksView = new app.views.BookListView({ model: new app.collections.BookItemCollection() });
         }
         $('#app').html("loading...");
-        var onResponse = app.randomBooksView.model.fetch({reset: true});
-        $.when(onResponse).then(function () {
-            $('#app').html(app.randomBooksView.render().el);
-        });
+        app.randomBooksView.model.fetch({reset: true,
+            success: function () {
+                var myview = app.randomBooksView.render().el;
+                $('#app').html(myview);
+            }
+            });
     },
 
     searchbook: function () {
